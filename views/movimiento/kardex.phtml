@@ -1,0 +1,56 @@
+<script src="/javascript/wc_cargaProducto.js"></script>
+<script src="/javascript/wc_movimiento.js"></script>
+<h2>Movimientos :: Kardex por Producto</h2>
+<br>
+	<div id="busqueda">
+			Busqueda: </br>
+			<input  autofocus="on" type="text" id="txtproducto" size="30px" placeholder="Ingrese nombre del producto">
+			<!--<input type="hidden" id="idProducto" >-->
+			<input type="text" id="txtDescripcion" size="80px" disabled readonly>
+			<select id="periodo">
+				<option>Seleccione Periodo</option>
+				<?php for ($i=2013; $i <2070 ; $i++) { ?>
+					<option value="<?php echo $i ?>"><?php echo $i ?></option>
+				<?php } ?>
+			</select>
+                        <select id="idprod">
+				<option>Seleccione producto</option>
+                                <option value="3515">Todos</option>
+				<?php for ($i=1; $i <100 ; $i++) { ?>
+                                       
+					<option value="<?php echo $i ?>"><?php echo $i." primeros productos";?></option>
+                                           <?php $i=$i+19?>
+				<?php } ?>
+                                        
+			</select>
+			<br>
+			<select id="mesInicial">
+				<option>Seleccione Mes</option>
+				<?php $cantidadMes=count($mes); ?>
+				<?php for ($i=1; $i <=$cantidadMes ; $i++) { ?>
+					<option value="<?php echo $i ?>"><?php echo $mes[$i] ?></option>
+				<?php } ?>
+			</select>
+			<select id="mesFinal">
+				<option>Seleccione Mes</option>
+				<?php $cantidadMes=count($mes); ?>
+				<?php for ($i=1; $i <=$cantidadMes ; $i++) { ?>
+					<option value="<?php echo $i ?>"><?php echo $mes[$i] ?></option>
+				<?php } ?>
+			</select>
+			
+			&nbsp; Sunat<input type="checkbox" id="sunat" >
+			<input type="submit" value="Kardex Valorizado" id="btnCargaKardex">
+			<button id="btnImprimir">Imprimir</button>
+	</div>
+	<br><br><hr>
+<div id="listados">
+	
+	
+	<table id="tblKardexValorizado">
+		
+		<tbody>
+		</tbody>
+	</table>
+
+</div>

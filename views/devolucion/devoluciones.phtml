@@ -1,0 +1,59 @@
+<script src="/javascript/devolucion.js"></script>
+<h2>Crear Devolucion</h2>
+<fieldset>
+<ul class="inline-block">
+	<li>
+		<label>Ingrese Orden de Venta</label>
+		<input value="<?php echo $codigov; ?>" id="txtOV" placeholder="OV-13000001" maxlength="11" title="Formato (OV-)(año)(espacio que sobra con ceros '0')(numero)  Ejemplo OV-12000001" type="text" class="required uppercase" autofocus="on" autocomplete="false">
+		<button id="btnAceptar">Aceptar</button>
+		<label>Ingrese N° Devolucion</label>
+		<input value="<?php echo $iddevolucion; ?>" id="txtNDevolucion" type="text" class="numeric" autocomplete="false">
+		<button id="nuevaDevolucion">Nueva Devolucion</button>
+	</li>
+</ul><br>
+<ul>
+	<li>
+		Observaciones
+		<input type="text" placeholder="sin observaciones" id="observaciones" size="120">
+		<a href="#" id="grabarObservaciones"><img width="25" src="/imagenes/grabar.gif"></a>
+	</li>
+</ul>
+<div id="detalles">
+	<table id="tblDetalles">
+		<thead>
+			<tr>
+				<th rowspan="2">N°</th>
+				<th rowspan="2">codigo</th>
+				<th rowspan="2">Nombre</th>
+				<th rowspan="2">Cantidad Orden</th>
+				<th rowspan="2">Cant. Restante</th>
+				<th rowspan="2">Precio Vendido</th>
+				<th rowspan="2">Precio Devolucion</th>
+				
+				<th colspan="2">Cantidades</th>
+				<th rowspan="2">Importe<br>Devuelto</th>
+			</tr>
+			<tr>
+				<th>+ - Cant</th>
+				<th>Cant. Actual</th>
+			</tr>
+			
+		</thead>
+		<tbody>
+			<tr>
+				<td>Haga Click En Aceptar para ver los datos</td>
+
+			</tr>
+		</tbody>
+		<tfoot>
+			<td >
+				
+			</td>
+			
+		</tfoot>
+	</table>
+	
+</div>
+<button id="btnAprobar">Registrar</button>
+<button id="btnCancelar">Cancelar</button>
+</fieldset>

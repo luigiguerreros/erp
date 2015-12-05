@@ -1,0 +1,11 @@
+<?php
+session_start();
+if(!empty($_SESSION['mensaje_login'])){ ?>
+<h5><?php echo utf8_encode($_SESSION['mensaje_login']); ?></h5>
+<?php }?>
+
+<form id="acceso" name="acceso" action="/actor/valida/" method="post" >
+	Usuario :<br><input id="username" name="usuario" type="text" autofocus/><br>
+	Clave :<br><input id="password" name="contrasena" type="password"/>
+	<p><input type="submit" value=".::ENTRAR::." /></p>
+</form>

@@ -1,0 +1,68 @@
+<script type="text/javascript" src="/javascript/productoInventarioPart2.js"></script>
+<h2>Inventario Parte 2</h2>
+
+<fieldset>
+
+	<ul>
+		<li>
+			<?php $cantidadActor=count($actor); ?>
+			<label>Responsable</label>
+			<select id="lstResponsable">
+				<?php for ($i=0; $i <$cantidadActor ; $i++) { ?>
+					<option value="<?php echo $actor[$i]['idactor'] ?>" ><?php echo $actor[$i]['nombres'].' '.$actor[$i]['apellidopaterno'].' '.$actor[$i]['apellidomaterno'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<?php $cantidadAuxiliar=count($auxiliar); ?>
+			<label>Auxiliar</label>
+			<select id="lstAuxiliar">
+				<?php for ($i=0; $i <$cantidadAuxiliar ; $i++) { ?>
+					<option value="<?php echo $auxiliar[$i]['idactor'] ?>" ><?php echo $auxiliar[$i]['nombres'].' '.$auxiliar[$i]['apellidopaterno'].' '.$auxiliar[$i]['apellidomaterno'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<label>Hora Inicio</label>
+			<input type="text" size="15" id="txtHoraInicio" placeholder="0:00 AM">
+		</li>
+		<li>
+			<label>Hora Termino</label>
+			<input type="text" size="15" id="txtHoraTermino" placeholder="0:00 PM">
+		</li>
+		
+	</ul><br>
+	<ul>
+		
+		<li>
+			<?php $cantidadInventario=count($inventario); ?>
+			<label>Inventario</label>
+			<select id="lstInventario">
+				<?php for ($i=0; $i <$cantidadInventario ; $i++) { ?>
+					<option value="<?php echo $inventario[$i]['idinventario'] ?>" ><?php echo $inventario[$i]['codigoinv'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<?php $cantidadBloques=count($bloques); ?>
+			<label>Bloque</label>
+			<select id="lstBloques">
+				<?php for ($i=0; $i <$cantidadBloques ; $i++) { ?>
+					<option value="<?php echo $bloques[$i]['idbloque'] ?>" ><?php echo $bloques[$i]['codigo'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<button id="btnBuscar">Buscar</button>
+		</li>
+		<li>
+			<button id="BtnNuevaBusqueda">Nueva Busqueda</button>
+		</li>
+		
+	</ul>
+</fieldset>
+<fieldset>
+	<table id="tblInventario">
+
+	</table>
+</fieldset>		

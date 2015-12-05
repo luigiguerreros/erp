@@ -1,0 +1,59 @@
+<script type="text/javascript"src="/javascript/productoInventario.js" ></script>
+
+<h2>Inventario</h2>
+<fieldset>
+	<ul>
+		<li>
+			<label>Codigo</label>
+			<input type="text" id="txtProductoInventario" class="uppercase" autofocus="on">
+			<input type="hidden" id="txtIdProducto" val="0">
+		</li>
+		<li>
+			<label>Descripcion</label>
+			<input type="text" id="txtDescripcion" size="70" readonly style="background:silver;">
+		</li>
+		<li>
+			<?php $cantidadInventario=count($inventario); ?>
+			<label>Inventario</label>
+			<select id="lstInventario">
+				<?php for ($i=0; $i <$cantidadInventario ; $i++) { ?>
+					<option value="<?php echo $inventario[$i]['idinventario'] ?>" ><?php echo $inventario[$i]['codigoinv'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<?php $cantidadBloques=count($bloques); ?>
+			<label>Bloque</label>
+			<select id="lstBloques">
+				<?php for ($i=0; $i <$cantidadBloques ; $i++) { ?>
+					<option value="<?php echo $bloques[$i]['idbloque'] ?>" ><?php echo $bloques[$i]['codigo'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<button id="btnAgregar">Agregar</button>		
+		</li>	
+	</ul>
+	
+</fieldset>
+
+<fieldset>
+	<form >
+		<table id="tblProducto">
+			<thead>
+				<tr>
+					<th>Codigo</th>
+					<th>Descripcion</th>
+					<th>Inventario</th>
+					<th>Bloque</th>
+					<th>Mal Estado</th>
+					<th>Servicio Tecnico</th>
+					<th>Show Room</th>
+					<th colspan="2">Accion</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+		
+	</form>
+</fieldset>

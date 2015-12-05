@@ -1,0 +1,90 @@
+<script src="/javascript/proveedor.js"></script>
+<form action="/proveedor/actualiza/" method="POST">
+	<fieldset>
+		<legend>Actualizaci&oacute;n de Proveedor</legend>
+		<ul class="inline-block">
+<!-- 			<li>
+				<label>Tipo de Proveedor</label>
+				<select name="lstTipoCliente" id="lstTipoCliente">
+					<option value="">-- Tipo --
+					<?php
+						//for($i=1;$i<=count($TipoProveedor);$i++){
+							//echo '<option value="'.$i.'">'.$TipoProveedor[$i];
+						//}
+					?>
+				</select>
+			</li> -->
+<!-- 			<li class="pnatural">
+				<label>Apellido Paterno:</label>
+				<input type="text" value="<?php echo $Proveedor[0]['apellidopatp'] ?>" name="Proveedor[apellidopatp]" class="required uppercase">
+			</li>
+			<li class="pnatural">
+				<label>Apellido Materno:</label>
+				<input type="text" value="<?php echo $Proveedor[0]['apellidomatp'] ?>" name="Proveedor[apellidomatp]" class="required uppercase">
+			</li>
+			<li class="pnatural">
+				<label>Nombres:</label>
+				<input type="text" value="<?php echo $Proveedor[0]['nombrep'] ?>" name="Proveedor[nombrep]" class="required uppercase">
+			</li> -->
+			<li class="pjuridica">
+				<label>Razon Social:</label>
+				<input required type="text" placeholder="Razon Social o Nombre de la Empresa" value="<?php echo $Proveedor[0]['razonsocialp'] ?>" name="Proveedor[razonsocialp]" class="txtRSocial uppercase" size="50px">
+			</li>
+			<li class="pjuridica">
+				<label>Representante legal:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['rlegal'] ?>" name="Proveedor[rlegal]" class="txtRSocial uppercase" size="50px">
+			</li>
+			<li class="pjuridica">
+				<label>Persona de Contacto:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['contacto'] ?>" name="Proveedor[contacto]" class="txtRSocial uppercase" size="50px">
+			</li>						
+<!-- 			<li class="pnatural">
+				<label>DNI:</label>
+				<input type="text" value="<?php echo $Proveedor[0]['dnip'] ?>" name="Proveedor[dnip]" size="8" maxlength="8" class="required numeric">
+			</li> -->
+			<li>
+				<label>Direcci&oacute;n:</label>
+				<textarea required cols=42 row=15 name="Proveedor[direccionp]" class="required uppercase" size="50px"><?php echo $Proveedor[0]['direccionp'] ?></textarea>
+			</li>			
+			<li>
+				<label>Breve descripci&oacute;n:</label>
+				<textarea required cols=42 row=15 name="Proveedor[descripcionp]" class="required uppercase" size="50px"><?php echo $Proveedor[0]['descripcionp'] ?></textarea>
+			</li>
+		</ul>
+		<ul class="inline-block">
+			<li class="pjuridica">
+				<label>RUC/NIF:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['rucp'] ?>" name="Proveedor[rucp]" size="11" maxlength="11" class="numeric">
+			</li>
+			<li>
+				<label>E-mail Principal:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['emailp'] ?>" name="Proveedor[emailp]" class="email">
+			</li>
+			<li>
+				<label>E-mail Alternativo:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['email2p'] ?>" name="Proveedor[emailp]" class="email">
+			</li>	
+			<li>
+				<label>Pagina Web: </label>
+				<input required type="text" value="<?php echo $Proveedor[0]['webp'] ?>" name="Proveedor[webp]" class="web" placeholder="http://www.miweb.com">
+			</li>					
+			<li>
+				<label>Tel&eacute;fono Principal:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['telefonop'] ?>" name="Proveedor[telefonop]" maxlength="11" class="numeric">
+			</li>
+			<li>
+				<label>Tel&eacute;fono Alternativo:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['telefonop2'] ?>" name="Proveedor[telefonop2]" maxlength="11" class="numeric">
+			</li>
+			<li>
+				<label>Fax:</label>
+				<input required type="text" value="<?php echo $Proveedor[0]['faxp'] ?>" name="Proveedor[faxp]" maxlength="12" class="numeric">
+			</li>
+			<li>
+				<input type="hidden" name="idProveedor" value="<?php echo $_REQUEST['id']?>">
+				<input type="submit" value="Actualizar" class="btnActualizar">
+				<button id="btnCancelar">Cancelar</button>
+			</li>
+		</ul>
+	</fieldset>
+</form>

@@ -1,0 +1,93 @@
+<script src="/javascript/proveedor.js"></script>
+<form action="/proveedor/graba/" method="POST" >
+	<fieldset>
+		<legend>Proveedor Nuevo</legend>
+		<ul class="inline-block">
+<!-- 			<li>
+				<label>Tipo de Proveedor</label>
+				<select name="lstTipoCliente" id="lstTipoCliente">
+					<option value="">-- Tipo --
+					<?php
+						for($i=1;$i<=count($TipoProveedor);$i++){
+							echo '<option value="'.$i.'">'.$TipoProveedor[$i];
+						}
+					?>
+				</select>
+			</li> -->
+<!-- 			<li class="pnatural">
+				<label>Apellido Paterno:</label>
+				<input type="text" name="Proveedor[apellidopatp]" class="required uppercase">
+			</li>
+			<li class="pnatural">
+				<label>Apellido Materno:</label>
+				<input type="text" name="Proveedor[apellidomatp]" class="required uppercase">
+			</li>
+			<li class="pnatural">
+				<label>Nombres:</label>
+				<input type="text" name="Proveedor[nombrep]" class="required uppercase">
+			</li> -->
+			<li >
+				<label>Razon Social:</label>
+				<input required type="text" placeholder="Razon Social/Nombre Empresa" name="Proveedor[razonsocialp]" class="txtRSocial uppercase">
+			</li>
+			<li >
+				<label>Representante legal:</label>
+				<input  type="text" placeholder="Representante Legal" value="<?php echo $Proveedor[0]['rlegal'] ?>" name="Proveedor[rlegal]" class="txtRSocial uppercase" size="50px">
+			</li>
+			<li >
+				<label>Persona de Contacto:</label>
+				<input  type="text" placeholder="Persona de contacto/Vendedor" value="<?php echo $Proveedor[0]['contacto'] ?>" name="Proveedor[contacto]" class="txtRSocial uppercase" size="50px">
+			</li>	
+			<li>
+				<label>Direcci&oacute;n:</label>
+				<textarea  name="Proveedor[direccionp]" id="" cols="42" rows="4" class="required uppercase"></textarea>
+<!-- 				<input type="text" name="Proveedor[direccionp]" class="required uppercase"> -->
+			</li>	
+			<li>
+				<label>Descripci&oacute;n:</label>
+				<textarea   name="Proveedor[descripcionp]" id="" cols="42" rows="4" class="required uppercase"></textarea>
+<!-- 				<input type="text" name="Proveedor[descripcionp]" class="required uppercase"> -->
+			</li>									
+<!-- 			<li class="pnatural">
+				<label>DNI:</label>
+				<input type="text" name="Proveedor[dnip]" size="8" maxlength="8" class="required numeric">
+			</li> -->
+
+		</ul>
+		<ul class="inline-block">
+
+			<li >
+				<label>RUC:</label>
+				<input  type="text" placeholder="Codigo Internacional" name="Proveedor[rucp]" size="11" maxlength="11" class="numeric">
+			</li>			
+			<li>
+				<label>E-mail Principal:</label>
+				<input  type="text" placeholder="Email de uso frecuente" name="Proveedor[emailp]" class="email">
+			</li>
+			<li>
+				<label>E-mail Alternativo:</label>
+				<input  type="text" placeholder="Email alterno o del vendedor" name="Proveedor[emailp2]" class="email">
+			</li>			
+			<li>
+				<label>Pagina Web:</label>
+				<input  type="text" placeholder="http://www.webdelaempresa.com" name="Proveedor[webp]" class="email">
+			</li>
+			<li>
+				<label>Tel&eacute;fono Principal:</label>
+				<input  type="text" placeholder="Teléfono de contacto principal" name="Proveedor[telefonop]" maxlength="7" class="numeric">
+			</li>
+			<li>
+				<label>Tel&eacute;fono Alternativo:</label>
+				<input  type="text" placeholder="Teléfono de contacto del vendedor" name="Proveedor[telefonop2]" maxlength="9" class="numeric">
+			</li>
+			<li>
+				<label>Fax:</label>
+				<input  type="text" name="Proveedor[faxp]" maxlength="7" class="numeric">
+			</li>
+		</ul>
+		<input type="hidden" name="Proveedor[tipoEmpresa]" value=2>
+		<input type="hidden" name="Proveedor[idpais]" value=46>
+	</fieldset>
+		<input type="submit" value="Registrar" class="btnRegistrar">
+		<button id="btnCancelar">Cancelar</button>
+</form>

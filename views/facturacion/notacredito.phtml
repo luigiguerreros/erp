@@ -1,0 +1,112 @@
+<script type="text/javascript" src="/javascript/notacredito.js"></script>
+<form action="/facturacion/registranotacredito/" method="POST">
+	<h2>Facturación: Nota de Crédito</h2>
+	<fieldset>
+		<legend>Busqueda de Orden de Venta</legend>
+		<ul>
+			<li>
+				<label>Nro. Factura:</label>
+				<input type="text" id="txtFactura" maxlength="10" size="10">
+				<input type="hidden" id="txtIdOrden" name="NotaCredito[idordenventa]" >
+				<input type="hidden" id="idcliente" name="idcliente">
+			</li>
+			<li>
+				<label>Motivo:</label>
+				<select id="lstMotivoNotaCredito" name="NotaCredito[concepto]" required>
+					<option value="">Seleccione uno</option>
+					
+					<option value="2">Por Precio</option>
+				</select>
+			</li>
+			<li>
+				<label>Fecha:</label>
+				<label style="color:#f00"><?php echo date("d/m/Y") ?></label>
+				<input type="hidden" value="<?php echo date("Y/m/d") ?>" name="NotaCredito[fechadoc]">
+			</li>
+			<li>
+				<label>Serie</label>
+				<input type="text" name="NotaCredito[serie]" maxlength="3" size="3" required>
+			</li>
+			<li>
+				<label>Nro. Nota</label>
+				<input type="text" name="NotaCredito[numdoc]" maxlength="6" size="6" required>
+			</li>
+			<li>
+				<label>Monto</label>
+				<input type="text" name="NotaCredito[montofacturado]" id="credito" maxlength="6" size="6" required>
+			</li>
+			<li>
+				<input type="submit" value="Registrar" class="btnRegistrar" id="registrar">
+			</li>
+		</ul>
+	</fieldset>
+	
+</form>
+	<fieldset>
+		<legend><h1 style="color:blue">Datos de la Factura</h1></legend>
+		<ul>
+			<li>
+				<label>N° de Factura</label>
+				<input type="text" id="numeroFactura" readonly>
+			</li>
+			<li>
+				<label>Porcentaje de Facturacion</label>
+				<input type="text" id="porcentajeFacturacion" readonly> 
+			</li>
+			<li>
+				<label>Modo de Facturacion</label>
+				<input type="text" id="modoFacturacion" readonly>
+			</li>
+			<li>
+				<label>Monto de la Factura</label>
+				<input type="text" id="montoFactura" readonly>
+			</li>
+			<li>
+				<label>Monto del IGV</label>
+				<input type="text" id="montoIGV" readonly>
+			</li>
+			<li>
+				<label>Saldo de la Factura</label>
+				<input type="text" id="saldo" readonly>
+				<input type="hidden" id="saldoEscondido" >
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend><h1 style="color:blue">Datos  de la Orden</h1></legend>
+		<ul>
+			<li>
+				<label>Codigo</label>
+				<input type="text" id="codigo" size="10" readonly>
+				
+			</li>
+			<li>
+				<label>Monto </label>
+				<input type="text" id="importe" size="10" readonly>
+			</li>
+			<li>
+				<label>Nombre o Razon Social:</label>
+				<input type="text" id="txtCliente" readonly size="45">
+			</li>
+			<li>
+				<label>RUC/DNI:</label>
+				<input type="text" id="txtRucDni" maxlength="11" size="11" readonly>
+			</li>
+			<li>
+				<label>Dirección</label>
+				<input type="text" id="direccion" readonly size="40">
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<label>Ubicacion</label>
+				<input type="text" id="ubicacion" readonly size="50">
+			</li>
+			<li>
+				<label>Telefono</label>
+				<input type="text" id="telefono" readonly>
+			</li>
+		</ul>
+	</fieldset>
+	
+	

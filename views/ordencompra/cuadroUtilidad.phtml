@@ -1,0 +1,118 @@
+
+<br>
+<script type="text/javascript" src="/javascript/cuadroUtilidades.js"></script>
+<h2>Ventas :: Cuadro de Utilidad  por Orden de Compra</h2>
+<br>
+<ul>
+	<li>Ordenes de Compra Valorizadas</li><br>
+	<li>
+		<select id="lstValorizados">
+			<option>--Seleccione--</option>
+			<?php 
+				$cantidadValorizado=count($valorizado);
+				for ($i=0; $i <$cantidadValorizado ; $i++) { ?>
+				<option value="<?php echo $valorizado[$i]['idordencompra'] ?>"><?php echo $valorizado[$i]['codigooc'] ?></option>
+			<?php } ?>
+		</select>
+	</li>
+</ul>
+<input type="hidden" id="vbimportaciones" value="<?php echo $Ordencompra[0]['vbimportaciones'] ?>">
+<input type="hidden" id="cuadroutilidad" value="<?php echo $Ordencompra[0]['cuadroutilidad'] ?>">
+<div id="contenedorImpresion">
+	<form method="post" action="/ordencompra/actualizaUtilidad">
+		<table>
+			<thead>
+				<tr style="height:40">
+					
+					<th colspan="2">PROVEEDOR:</th>
+					<td colspan="2"><?php echo  $Ordencompra[0]['razonsocialp']; ?></td>
+					<th colspan="4">Orden de Compra</th>
+					<td colspan="2"><?php echo  $Ordencompra[0]['codigooc']; ?></td>
+					<th colspan="2">FECHA DE INGRESO</th>
+					<td colspan="2"><?php echo  $Ordencompra[0]['faproxllegada']; ?></td>
+					<th>EMPRESA</th>
+					<td colspan="4"><?php echo  $Ordencompra[0]['razsocalm']; ?></td>
+				</tr>
+				<tr><td colspan="19" style="background:white;">&nbsp</td></tr>
+				<tr>
+					<th>N°</th>
+					<th>Codigo</th>
+					<th>Descripcion</th>
+					<th>Marca</th>
+					<th>QTY</th>
+					<th>UNIT</th>
+					<th colspan="2">PSC X CTN</th>
+					<th>FOB Unitario (US $)</th>
+					<th>Precio<br>Costo<br> (US $)</th>
+					<th>Cif <br>Ventas (30%)<br> (US $)</th>
+					<th>Tipo de<br> Cambio <br>(US $)</th>
+					<th>Neto <br>(US $)</th>
+					<th>Precio <br>Lista<br> US $</th>
+					<th>Neto <br>(S/.)</th>
+					<th>Precio<br> Lista <br>S/.</th>					
+					<th>Utilidad</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="19" style="text-align:center;">
+						<b id="resp"></b>
+						<input type="hidden" name="tipocambio" value="<?php echo $Ordencompra[0]['tipocambiovigente'] ?>">
+						<input type="hidden" name="idordencompra" value="<?php echo $Ordencompra[0]['idordencompra']; ?>">
+					</td>
+				</tr>
+
+				<?php 
+				$tipocambio=$Ordencompra[0]['tipocambiovigente'];
+				$idtipocambio=$Ordencompra[0]['idtipocambiovigente'];
+				$cantidad=count($Detalleordencompra);
+				$porcentaje=(($porcifventas+100)/100);
+				for ($i=0; $i <$cantidad ; $i++) { 	?>
+					
+				<tr>
+					<td>
+						<?php echo ($i+1); ?>
+						<input type="hidden" value="<?php echo  $Detalleordencompra[$i]['idproducto']; ?>" name="idproducto[<?php echo $i; ?>]">
+						<input type="hidden" value="<?php echo  $Detalleordencompra[$i]['iddetalleordencompra']; ?>" name="iddetalleordencompra[<?php echo $i; ?>]">
+						
+					</td>
+					<td><?php echo  $Detalleordencompra[$i]['codigopa']; ?></td>
+					<td class="text-300"><?php echo  $Detalleordencompra[$i]['nompro']; ?></td>
+					<td><?php echo  $Detalleordencompra[$i]['marca']; ?></td>
+					<td><?php echo  $Detalleordencompra[$i]['cantidadrecibidaoc']; ?></td>
+					<td><?php echo  $Detalleordencompra[$i]['unidadmedida']; ?></td>
+					<td><?php echo  $Detalleordencompra[$i]['piezas']; ?></td>
+					<td><?php echo  $Detalleordencompra[$i]['carton']; ?></td>
+					<!-- <td><?php echo  number_format($Detalleordencompra[$i]['fobdoc']*$tipocambio,2); ?><input type="hidden" class="fobUnit" value="<?php echo  $Detalleordencompra[$i]['fobdoc']*$tipocambio; ?>"></td>
+					<td><input readonly type="text" size=5 class="costoAlmacen" value="<?php echo  number_format($Detalleordencompra[$i]['totalunitario']*$tipocambio,2); ?>" style="border:none;"></td>
+					<td><input type="text"  name="Producto[<?php echo $i; ?>][cifventas]" value="<?php echo  number_format($Detalleordencompra[$i]['fobdoc']*$porcentaje*$tipocambio,2); ?>" class="cifVentas" style="border:none" readonly size="5"></td>
+					<td><input type="text" class="neto" size="5" name="Producto[<?php echo $i; ?>][preciotope]"><label style="display:none;" class="lblNeto"></label></td>
+					<td>S/.<?php echo  number_format($Detalleordencompra[$i]['preciocosto'],2); ?></td>
+					<td>S/.<?php echo  number_format($Detalleordencompra[$i]['preciolista'],2); ?></td>
+					<td>S/.<?php echo  number_format($Detalleordencompra[$i]['precioreferencia01'],2); ?></td>
+					<td>S/.<?php echo  number_format($Detalleordencompra[$i]['precioreferencia02'],2); ?></td>
+					<td>S/.<?php echo  number_format($Detalleordencompra[$i]['precioreferencia03'],2); ?></td>
+					<td><input type="text" size="5" class="preciolista" name="Producto[<?php echo $i; ?>][preciolista]" readonly style="background:skyblue;" value="0.00"><label style="display:none;" class="lblPrecioLista"></label></td>
+					<td><input type="text" size="5" class="utilidad" value="0.00" style="border:none;text-align:center;" name="DetalleOrdenCompra[<?php echo $i; ?>][utilidadDetalle]"><label style="display:none;" class="lblUtilidad"></td>
+					
+ -->				
+					<td><?php echo  number_format($Detalleordencompra[$i]['fobdoc'],2); ?><input type="hidden" class="fobUnit" value="<?php echo  $Detalleordencompra[$i]['fobdoc']; ?>"></td>
+					<td><?php echo  number_format($Detalleordencompra[$i]['preciocosto']/$tipocambio,2); ?></td>
+					<td><input type="text"  name="Producto[<?php echo $i; ?>][cifventasdolares]" value="<?php echo  number_format($Detalleordencompra[$i]['fobdoc']*$porcentaje,2); ?>" class="cifVentas" style="border:none" readonly size="5"></td>
+					<input type="hidden"  name="Producto[<?php echo $i; ?>][cifventas]" value="<?php echo  number_format($Detalleordencompra[$i]['fobdoc']*$porcentaje*$tipocambio,2); ?>">
+					<td><input type="text" class="tipocambio" size="4" name="Producto[<?php echo $i; ?>][valortipocambio]" value="<?php echo number_format($tipocambio,2)?>"></td>
+					<td><input type="text" class="neto" size="5" name="Producto[<?php echo $i; ?>][preciotopedolares]"><label style="display:none;" class="lblNeto"></label></td>
+					<td><input type="text" size="5" class="preciolista" name="Producto[<?php echo $i; ?>][preciolistadolares]" readonly style="background:skyblue;" value="0.00"><label style="display:none;" class="lblPrecioListaDolares"></label></td>
+					<td><input type="text" class="netosoles" size="5" name="Producto[<?php echo $i; ?>][preciotope]" readonly style="background:lightblue;" value="0.00" ></td>
+					<td><input type="text" size="5" class="preciolistasoles" name="Producto[<?php echo $i; ?>][preciolista]" readonly style="background:lightblue;" value="0.00"></td>
+					<td><input type="text" size="5" class="utilidad" readonly value="0.00" style="border:none;text-align:center;" name="DetalleOrdenCompra[<?php echo $i; ?>][utilidadDetalle]"><label style="display:none;" class="lblUtilidad"></td>
+					
+
+					</tr>
+				<?php } ?>
+			</tbody>
+		</table>
+		<input id="btnAceptar" type="submit" value="Aceptar" disabled="disabled" style="background:red">
+		<a href="#" id="imprimir" ><img src="/imagenes/imprimir.gif"></a>
+	</form>
+</div>

@@ -1,0 +1,35 @@
+<script type="text/javascript" src="/javascript/editarInventario.js"></script>
+<h2>Edicion de Inventario</h2>
+
+<fieldset>
+	<ul>
+		<li>
+
+			<?php $cantidadInventario=count($inventario); ?>
+			<label>Inventario</label>
+			<select id="lstInventario">
+				<?php for ($i=0; $i <$cantidadInventario ; $i++) { ?>
+					<option value="<?php echo $inventario[$i]['idinventario'] ?>" ><?php echo $inventario[$i]['codigoinv'] ?></option>
+				<?php } ?>
+			</select>
+		</li>
+		<li>
+			<label>Producto</label>
+			<input type="text" size="20" id="txtInventarioProducto">
+			<input type="hidden" id="idProducto" value="0"> 
+		</li>
+		<li>
+			<label>Descripcion</label>
+			<input type="text" size="60" id="txtDescripcion" readonly="readonly">
+		</li>
+		<li>
+			<button id="btnBuscar">Buscar</button>
+		</li>		
+	</ul>
+</fieldset>
+
+<fieldset>
+	<table id="tblDetalle">
+
+	</table>
+</fieldset>

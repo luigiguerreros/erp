@@ -1,0 +1,145 @@
+<style type="text/css">
+	#fsObservaciones{
+		padding-top:0px;
+		display:inline;
+		position:absolute;
+		right:10px;
+		top:5px;
+	}
+	#fsObservaciones li{
+		margin:0px;
+		padding:0px;
+		display:block;
+	}
+</style>
+<script type="text/javascript" src="/javascript/generacion-factura.js"></script>
+<input type="hidden" value="1" id="txtContador">
+<form action="/facturacion/generafactura/" method="POST">
+	<h2>Documento: Generar Factura o Boleta</h2>
+	<br>
+	<fieldset>
+		<legend>Busqueda de Orden de Venta</legend>
+		<ul>
+			<li>
+				<label>Fecha:</label>
+				<!--<label style="color:#f00"><?php //echo date("d/m/Y") ?></label>-->
+				<input type="text" class="datepicker" id="Factura[fechadoc]" value="<?php echo date("Y/m/d") ?>" name="Factura[fechadoc]" readonly>
+			</li>
+			<li>
+				<label>Nro. Orden:</label>
+				<input type="hidden" id="txtIdOrden" name="Factura[idOrdenVenta]" required="required">
+				<input type="text" id="txtOrdenVenta" size="12" class="uppercase">
+			</li>
+			<li>
+				<label>Tipo Documento</label>
+				<select name="Factura[nombredoc]" required="required" id="lstDoc">
+					<?php $CantidadDocumentos=count($tipoDocumento) ?>
+					<option value="">Seleccione Doc.</option>
+					<?php for ($i=1; $i <3 ; $i++) { ?>
+						<option value="<?php echo $i; ?>"><?php echo $tipoDocumento[$i]; ?></option>
+					<?php } ?>
+				</select>
+			</li>
+
+			<li>
+				<label>Serie:</label>
+				<input type="text" maxlength="3" size="3"  style="color:#f00" name="Factura[serie]" required="required" id="txtSerie">
+			</li>
+			<li>
+				<label>Nro. Documento:</label>
+				<input type="text" maxlength="10" size="10" name="Factura[numdoc]" required="required" id="textNFactura">
+			</li>
+			<li>
+				<label>Empresa:</label>
+				<select name="OrdenVenta[idalmacen]" required="required" id="lstEmpresa">
+					<option value="">Seleccione Empresa
+					<?php	
+						for($i=0;$i<count($Empresa);$i++){
+							echo '<option value="'.$Empresa[$i]['idalmacen'].'">'.$Empresa[$i]['nomalm'];
+						}
+					?>
+				</select>
+			</li>
+			
+			
+		</ul>
+	</fieldset>
+	<fieldset style="position:relative">
+		<legend>Orden de Venta</legend>
+		<ul class="inline-block">
+			<li>
+				<label>Cliente:</label>
+				<input type="text" id="txtCliente" readonly>
+				<input type="hidden" id="idcliente">
+			</li>
+			<li>
+				<label>Direccion :</label>
+				<input type="text" id="txtDireccionEnvio" readonly required="required" name="OrdenVenta[direccion_envio]">
+				<input type="hidden" id="direccionInicial">
+				<select id="lstDireccion">
+					<option value="">Direcciones</option>
+				</select>
+			</li>
+			<li>
+				<label>Contacto :</label>
+				<input type="text" id="txtContacto" readonly required="required" name="OrdenVenta[contacto]">
+				<input type="hidden" id="contactoInicial">
+				<select id="lstContacto">
+					<option value="">Nombre de Contactos</option>
+				</select>
+			</li>
+			<li>
+				<label>Fec. Gen.:</label>
+				<input type="text" id="txtFechaGuia" maxlength="10" size="10" readonly>
+			</li>
+			<li class="gbfacturacion">
+				<label>Porcentaje:</label>
+				<input type="text" id="txtPorcentajeFacturacion" maxlength="3" class="text-30 gbPorcentajeFacturacion numeric"  name="Factura[porcentajefactura]" required="required" autocomplete="off"><strong> %</strong>
+			</li>
+			<li class="gbfacturacion">
+				<label>Modo Facturacion:</label>
+				<select id="lstModoFacturacion" name="Factura[modofactura]" required="required">
+					<option value="" selected>-- Modo --
+					<?php
+						for($i=1;$i<=count($ModoFacturacion);$i++){
+							echo '<option value="'.$i.'">'.$ModoFacturacion[$i];
+						}
+					?>
+				</select>
+			</li>
+		</ul>
+		<fieldset id="fsObservaciones">
+			<legend>Observaciones</legend>
+			<div id="divObservaciones"></div>
+		</fieldset>
+	</fieldset>
+	<fieldset>
+		<legend>Productos</legend>
+			<div id="listados">
+				<table id="tblProductosGuia">
+					<thead>
+						<tr>
+							<th>Codigo</th>
+							<th>Descripci&oacute;n</th>
+							<th>Cant. Despachada</th>
+							<th>Cant. Devuelta</th>
+							<th>Cantidad</th>
+							<th>P.Unit.</th>
+							<th>Dscto</th>
+							<th>P.Dscto.</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="8" class="right bold">Importe Total:</td>
+							<td><input type="text" value="0" name="Factura[montofacturado]" class="text-100" id="txtImporteTotal"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</fieldset>
+	<input type="submit" value="Registrar" class="btnRegistrar" id="btnRegistrar">
+</form>
+
+<div id="test"></div>

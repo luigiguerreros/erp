@@ -1,0 +1,186 @@
+<script src="/javascript/guia.js"></script>
+
+<?php
+$max_item_xfactura=$maximoItem;
+$cantidad=count($DetalleFactura);
+$pages=$hojas;
+?>
+
+<?php
+
+for($z=0;$z<$pages;$z++){
+	$minimo=($z)*$max_item_xfactura;
+	$maximo=(($minimo+$max_item_xfactura)>$cantidad)?($cantidad):($minimo+$max_item_xfactura);
+?>
+<div id="imprimirdiv">
+
+<a href="" id="print" ><img src="/imagenes/imprimir.gif"></a>
+</div>
+<div id="muestra">
+
+
+	<table id="encabezado" cellspacing="0" cellpadding="0">
+		<tr class="si" >
+			<th colspan="7" Style="font-size: 11px;text-align:left;"> <?php echo $Factura[0]['referencia']; ?></th>
+		</tr>
+		
+		<tr>
+			<th Style="font-size:6px;margin:0px;heigth:6px;">&nbsp;</th>
+		</tr >	
+		<tr>
+			<th Style="font-size:6px;margin:0px;heigth:6px;">&nbsp;</th>
+		</tr >	
+		<tr class="si" >
+			<th class="th1" >&nbsp; </th>
+			<th class="th2" ><?php echo date('d-m-Y'); ?></th>
+			<th class="th3" >&nbsp;</th>
+			<th colspan="3" class="th4" >&nbsp;</th>
+		</tr>
+		
+		<tr class="si">
+			<th class="th1">&nbsp; </th>
+			<th class="th2"><?php echo date('d-m-Y');  ?></th>
+			<th colspan="4" style="width:205;text-align:left"><?php echo substr(trim($Factura[0]['razonsocial']),0,39); ?></th>
+		</tr>
+		
+		<tr class="si">
+			<th class="th1">&nbsp; </th>
+			<th class="th2">&nbsp;</th>
+			
+			<th style="width:190;text-align:left;" colspan="2" ><?php echo $Factura[0]['ruc'];  ?></th>
+			<th >&nbsp;</th>
+			<th ><?php echo $Factura[0]['dni']; ?></th>
+		</tr>
+		<tr class="si">
+			<th class="th1">&nbsp; </th>
+			<th class="th2"><?php   ?>&nbsp;</th>
+			<th class="th3">&nbsp; </th>
+			<th colspan="3" class="th4">&nbsp;</th>
+		</tr>
+		<tr class="su">
+			<th class="th1">&nbsp; </th>
+			<th class="th2"><?php echo $Factura[0]['tipo'];  ?>&nbsp; </th>
+			<th class="th3">&nbsp;</th>
+			<th colspan="3" class="th4"><?php echo $Factura[0]['unidadTransporte'];  ?>&nbsp;</th>
+		</tr>
+		
+		<tr class="su">
+			<th class="th1">&nbsp;</th>
+			<th class="th2"><?php echo $Factura[0]['numeroRelacionado']; ?>&nbsp;</th>
+			<th class="th3">&nbsp;</th>
+			<th colspan="3" class="th4"><?php echo $Factura[0]['vehiculo']; ?>&nbsp;</th>
+		</tr>
+		<tr class="su">
+			<th class="th1">&nbsp;</th>
+			<th  width="450" style="text-align: left;" colspan="2"><?php echo $Factura[0]['domiPartida']; ?></th>
+			
+			<th colspan="3" class="th4"><?php echo $Factura[0]['constancia']; ?></th>
+		</tr>
+		<tr class="su">
+			<th class="th1">&nbsp;</th>
+			<th colspan="5" style="text-align: left;width:685"><?php echo substr($Factura[0]['direccion_despacho'].' - '.$Factura[0]['nombredepartamento'].' - '.$Factura[0]['nombreprovincia'].' - '.$Factura[0]['nombredistrito'],0,101); ?></th>
+			
+		</tr>
+		<tr class="su">
+			<th class="th1">&nbsp;</th>
+			<th class="th2" style="color:white;">&nbsp;</th>
+			<th class="th3">&nbsp;</th>
+			<th colspan="3" class="th4">&nbsp;</td>
+		</tr>
+	</table >
+	<table id="cuerpoFactura">
+		<thead>
+			<tr>
+				<th class="tc1"></th>
+				<th class="tc2"></th>
+				<th class="tc3"></th>
+				<th class="tc4"></th>
+				<th class="tc5"></th>
+				<th class="tc6"></th>
+			</tr>
+		</thead>
+		<tbody>
+				<?php if ($maximo>$max_item_xfactura ) { ?>
+					
+					<tr>
+						<td colspan="6" style="text-align: center" >VIENE....</td>
+					</tr>
+				<?php } ?>
+			<?php 
+			$importetotal=0;
+			/*$maximo=25;
+			$minimo=0;*/
+			//$cantidad=count($DetalleFactura);
+			for ($i=$minimo; $i <$maximo ; $i++) { 
+				///if (!empty($DetalleFactura[$i]['codigopa']) ) { ?>
+					
+				
+			<tr>
+				
+				<td class="tc1"><?php echo $i+1; ?></td>
+				<td class="tc2"><?php echo $DetalleFactura[$i]['codigopa']; ?></td>
+				<?php 
+				    $DetalleFactura[$i]['nompro']=htmlspecialchars_decode($DetalleFactura[$i]['nompro'],ENT_QUOTES);
+					$tamaño=strlen($DetalleFactura[$i]['nompro']);
+					$texto=substr($DetalleFactura[$i]['nompro'],0,45);
+					if ($tamaño>45) {
+						$texto.="...";
+					}
+				 ?>
+				<td class="tc3"><?php echo substr($DetalleFactura[$i]['nompro'],0,37); ?></td>
+				<td class="tc4"><?php echo $DetalleFactura[$i]['unidadmedida']; ?></td>
+				<td class="tc5"><?php echo $DetalleFactura[$i]['cantdespacho']; ?></td>
+				<td class="tc6">&nbsp;</td>
+				
+				
+
+			</tr>
+			<?php //} 
+			}?>
+				<?php if ($cantidad>$maximo && $maximo!=$cantidad) { ?>
+					<tr>
+						<td colspan="6"><?php echo str_pad('-',220,'-',STR_PAD_LEFT); ?></td>
+					</tr>	
+					<tr>
+						
+						<td colspan="6" style="text-align: center">VA....</td>
+					</tr>
+				<?php } ?>
+				<?php if ($maximo==$cantidad){ ?>
+					<tr>
+						<td colspan="6"><?php echo str_pad('-',220,'-',STR_PAD_LEFT); ?></td>
+					</tr>
+				<?php  } ?>
+				
+		</tbody>
+
+	</table>
+
+	<table id="piepagina">
+		
+		<tr>
+			<td clas="p1" ></td>
+			<td clas="p2" > <?php echo $Factura[0]['trazonsocial']; ?></td>
+			<td clas="p3" ></td>
+		</tr>
+		<tr>
+			<td clas="p1" ></td>
+			<td clas="p2" ><?php echo $Factura[0]['tdireccion']; ?></td>
+			<td clas="p3" ><?php echo $Factura[0]['truc']; ?></td>
+
+		</tr>
+		
+	</table>
+</div>
+ 
+<?php
+if(($pages-$z)!=1){
+?>
+<br style="page-break-before: always;" />
+<?php
+}
+}
+?>
+
+
+

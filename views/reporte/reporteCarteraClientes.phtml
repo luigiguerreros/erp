@@ -1,0 +1,161 @@
+<script src="/javascript/reporteCarteraClientes.js"></script>
+<h2>Reporte de Cartera de Clientes</h2>
+
+<fielset>
+	<form id="frmParametros" action="/pdf/reporteCarteraClientes" method="post" target="_blank" >
+		<ul>
+			  <li>
+			  	<label>Linea de Productos</label>
+				<select name="lstLineaProductos" id="lstLineaProductos">
+					<option value="">Seleccione Linea</option>
+					<?php $totalLineas=count($linea);?>
+					<?php for ($i=0;$i<$totalLineas;$i++){?>
+					<option value="<?php echo $linea[$i]['idlinea'];?>"><?php echo $linea[$i]['nomlin']?></option>
+					<?php }?>
+				</select>	  	
+			  </li>
+				<li>
+					<label for="txtVendedor">Nombre Vendedor</label>
+					<input type="text" id="txtVendedor" class="uppercase" size="40" style="background-color: pink;" />
+					<input type="hidden" id="idVendedor" name="idVendedor"/>
+				</li>
+	<!-- 			<li>
+					<label for="txtCliente">Nombre Cliente</label>
+					<input type="text" id="txtCliente" class="uppercase" size="50" style="background-color:skyblue;"/>
+					<input type="hidden" id="idCliente" name="idCliente"/>
+				</li>
+				<li>
+					<label for="txtOrdenVenta">Orden Venta</label>
+					<input type="text" id="txtOrdenVenta" class="uppercase" style="background-color:#9FFF6A;"/>
+					<input type="hidden" id="idOrdenVenta" name="idOrdenVenta"/>
+				</li> -->
+				
+			</ul>		  
+		  			<br>
+
+		  <ul>
+		  <li>
+		  	<label>Zona Geografica</label>
+			<select name="lstCategoriaPrincipal" id="lstCategoriaPrincipal">
+				<option value="">Seleccione Zona Geografica</option>
+				<?php $cantidadCategoriaPrincipal=count($categoriaPrincipal);?>
+				<?php for ($i=0;$i<$cantidadCategoriaPrincipal;$i++){?>
+				<option value="<?php echo $categoriaPrincipal[$i]['idcategoria'];?>"><?php echo $categoriaPrincipal[$i]['nombrec']?></option>
+				<?php }?>
+			</select>	  	
+		  </li>
+		  <li>
+		  	<label>Region de Cobranza</label>
+		  	<select name="lstRegionCobranza" id="lstRegionCobranza">
+		  		<option value="">Zona Cobranza-Categoria</option>
+		  	</select>
+		  </li>
+		  <li>
+		  	<label for="lstZona">Zona</label>
+		  	<select name="lstZona" id="lstZona">
+		  		<option value="">Zona Cobranza-Detalle</option>
+		  	</select>
+		  </li>
+		  <li>
+		  	<label for="txtFechaInicio">Fecha Inicio</label>
+		  	<input type="text" class="datepicker" id="txtFechaInicio" name="txtFechaInicio" style="background-color: #F7E816" readonly="readonly" autocomplete="off"/>
+		  </li>
+		  <li>
+		  	<label for="txtFechaFin">Fecha Final</label>
+		  	<input type="text" class="datepicker" id="txtFechaFin" name="txtFechaFin" style="background-color: #F7E816" readonly="readonly" autocomplete="off"/>
+		  </li>
+		  
+		</ul>
+		<br>
+
+		<ul>
+			<li>
+				<label for="lstDepartamento">Departamento</label>
+				<select name="lstDepartamento" id="lstDepartamento">
+					<option value="">Seleccione Departamento</option>
+				</select>
+			</li>
+			<li>
+				<label for="lstProvincia">Provincia</label>
+				<select name="lstProvincia" id="lstProvincia">
+					<option value="">Seleccione Provincia</option>
+				</select>
+			</li>
+			<li>
+				<label for="lstDistrito">Distrito</label>
+				<select name="lstDistrito" id="lstDistrito">
+					<option value="">Seleccione Distrito</option>
+				</select>
+			</li>
+
+<!-- 			<li>
+				<label for="lstFecIni">Fecha Inicial</label>
+				<input type="text" name="lstFecIni" id="FecIni" readonly class="datepicker">
+			</li>
+			<li>
+				<label for="lstFecFin">Fecha Final</label>
+				<input type="text" name="lstFecFin" id="lstFecFin" readonly class="datepicker">
+			</li> -->
+<!-- 			<li>
+				<label for="lstCondicion">Condicion</label>
+				<select name="lstCondicion" id="lstCondicion">
+					<option value="">Seleccione Condicion</option>
+					<?php $cantidadCondicionVenta=count($condicionVenta);?>
+					<?php for ($i=1;$i<=$cantidadCondicionVenta;$i++){?>
+					<option value="<?php echo $condicionVenta[$i];?>"><?php echo $condicionVenta[$i]?></option>
+					<?php }?>
+				</select>
+			</li>
+			<li>
+				<label for="lstSituacion">Situacion</label>
+				<select name="lstSituacion" id="lstSituacion">
+					<option value="">Seleccione Situacion</option>
+					<?php $cantidadSituacion=count($situacion);?>
+					<?php for ($i=1;$i<=$cantidadSituacion;$i++){?>
+					<option value="<?php echo $situacion[$i];?>"><?php echo $situacion[$i]?></option>
+					<?php }?>
+				</select>
+			</li> -->
+		</ul>
+		<br />
+		<ul>
+			<li>
+<!-- 				<button id="btnConsultarHtml5">Consultar <img style="vertical-align:middle" src="/imagenes/html5.png" width="25" height="25" /></button> -->
+				<button id="btnConsultarPdf">Consultar <img style="vertical-align:middle" src="/imagenes/iconos/pdf.gif" width="25" height="25" /></button>
+				<button id="btnConsultarExcel">Consultar <img style="vertical-align:middle" src="/imagenes/excel.png" width="25" height="25" /></button>
+				<button id="btnLimpiar">Limpiar <img style="vertical-align:middle" src="/imagenes/limpiar.png" width="25" height="25" /></button>
+<!-- 				<button id="btnImprimirHtml5"><img style="vertical-align:middle" src="/imagenes/html5.png" width="25" height="25" />Imprimir<img style="vertical-align:middle" src="/imagenes/imprimir.gif" width="25" height="25" /></button> -->
+			</li>
+		</ul>
+	</form>	
+</fielset>
+
+<div id="ContenedorImpresion">
+	<table style="display: none" id="encabezado">
+		<tr>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+			<th></th>
+			<td><label for="" class="cabecera"></label></td>
+		</tr>
+	</table>
+</div>
+ 

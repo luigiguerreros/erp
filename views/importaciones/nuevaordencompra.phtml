@@ -1,0 +1,148 @@
+<script src="/javascript/orden-compra.js"></script>
+<script src="/javascript/wc_ordencompra.js"></script>
+<input type="hidden" id="txtRutaImagen" value="<?php echo $RutaImagen ?>">
+<input type="hidden" id="contador" value="1">
+<form action="/ordencompra/graba/" method="POST" id="frmOrdenCompraNuevo">
+	<h2>Importaciones: Crear Orden de Compra</h2>
+	<br>
+	<div class="field-set">
+		<p class="title">Datos del Orden</p>
+		<div class="body">
+			<ul class="inline-block">
+				<li>
+					<label>Fecha:</label>
+					<strong style="color:#007F7F"><?php echo date('d/m/Y'); ?></strong>
+					<input type="hidden" value="<?php echo date('Y-m-d'); ?>" name="Ordencompra[fordencompra]">
+					<label>Moneda</label>
+					<select name="Ordencompra[monedaordencompra]" id="txtMoneda">
+						<option value="-1">Seleccione Moneda</option>
+						<option value="1">Soles (S/.)</option>
+						<option value="2">Dolares (US $)</option>
+					</select>
+					<input type="text" id="txtvalorventa">
+					<input type="hidden" id="txtidTipoCambio" name="Ordencompra[idtipocambiovigente]">
+					<input type="hidden" id="txtTipoCambioValor" name="Ordencompra[tipocambiovigente]">
+
+					<label>Empresa:</label>
+					<select id="lstEmpresa" name="Ordencompra[idalmacen]">
+						<option value="">-- Seleccionar uno --</option>
+						<?php
+							for($i=0;$i<count($Empresa);$i++){
+								echo '<option value="'.$Empresa[$i]['idalmacen'].'">'.$Empresa[$i]['nomalm'].'</option>';
+							}
+						?>
+					</select>
+					<button title="Cambiar Empresa" class="small-button" id="btnCambiarEmpresa">...</button>
+				</li>
+			</ul>
+			<ul class="inline-block">
+				<li>
+					<label>Proveedor:</label>
+					<select id="lstProveedor" name="Ordencompra[idproveedor]">
+						<option value="">-- Seleccionar uno --</option>
+						<?php
+							for($i=0;$i<count($Proveedor);$i++){
+								echo '<option value="'.$Proveedor[$i]['idproveedor'].'">'.$Proveedor[$i]['razonsocialp'];
+							}
+						?>
+					</select>
+					<button title="Cambiar Proveedor" class="small-button" id="btnCambiarProveedor">...</button>
+					<div id="agregarProveedor">Nuevo Proveedor</div>
+				</li>
+				<li>
+					<label>Producto:</label>
+					<input type="text" class="required uppercase" id="txtCodigoProductoCompras" style="width:250px">
+					<input type="hidden" id="txtIdProducto">
+					<button id="btnRedirecProducto">Nuevo Producto</button>
+
+					<label>Cantidad:</label>
+					<input type="text" style="width:55px" class="numeric required" id="txtCantidadProducto">
+					<button id="btnAgregarDetalleOrdenCompra" title="Agregar Producto">Agregar</button>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+	<div class="field-set">
+		<p class="title">Productos</p>
+		<div class="body">
+			<table id="tblDetalleOrdenCompra" class="hide">
+					<thead>
+						<tr>
+							<th>Foto</th>
+							<th>Codigo</th>
+							<th>Descripci&oacute;n</th>
+							<th>Marca</th>
+							<th>Empaque</th>
+							<th colspan="2">Cant/Uni</th>
+							<th>FOB</th>
+							<th>Total</th>
+							<th colspan="2">Pcs x Ctn</th>
+							<th>Vol</th>
+							<th>CBM</th>
+							<th colspan="2">Acci&oacute;n</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="right bold important">Monto Soles: (S/.)</td>
+							<td><input type="text" value="0.00" name="Ordencompra[importesoles]" class="right text-100" id="txtMontoTotalSoles" readonly></td>							
+							<td colspan="6" class="right bold">Total:</td>
+							<td class="center">
+								<input type="text" value="0.00" name="Ordencompra[importeordecompra]" class="right text-100" id="txtMontoTotal" readonly>
+							</td>
+							<td colspan="3" class="right">Total CBM:</td>
+							<td class="right">
+								<input type="text" value="0.00" name="Ordencompra[totalcbm]" class="right text-100" id="txtTotalCbm" readonly>
+							</td>
+						</tr>
+					</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="field-set">
+		<p class="title">Observaciones y/o detalles</p>
+			<ul class="block">
+				<li class="block">
+					<label>Registre sus observaciones :</label>
+					<input type="text" class="text-full" name="Ordencompra[observaciones]">
+				</li>
+			</ul>
+	</div>
+	<input type="submit" value="Registrar Orden" id="btnRegistrarOrden">
+	<button id="btnCancelar">Cancelar</button>
+</form>
+
+<div id="nuevoProveedorModal" title="Crear Nuevo Proveedor">
+		<p class="validateTips">Todos los Campor son requeridos</p>
+		<form id="frmProveedor">
+			<fieldset>
+				<label for="razsocProveedor">Razon Social</label>
+                <input type="text" id="razsocProveedor" name="razsocProveedor" size="35">
+                <label for="repreProveedor">Representante Legal</label>
+                <input type="text" id="repreProveedor" name="repreProveedor" size="35">
+                <label for="percontactoProveedor">Persona Contacto</label>
+                <input type="text" id="percontactoProveedor" name="percontactoProveedor" size="35">
+                <label for="direccionProveedor">Direccion</label>
+                <input type="text" id="direccionProveedor" name="direccionProveedor" size="35">
+                <label for="descripcionProveedor">Descripcion</label>
+                <input type="text" id="descripcionProveedor" name="descripcionProveedor" size="35">
+                <label for="rucProveedor">RUC</label>
+                <input type="text" id="rucProveedor" name="rucProveedor" size="35">
+                <label for="emailPrincipalProveedor">E-mail Principal</label>
+                <input type="text" id="emailPrincipalProveedor" name="emailPrincipalProveedor" size="35" placeholder="micorreo@ejemplo.com" >
+                <label for="emailAltenativoProveedor">E-mail Alternativo</label>
+                <input type="text" id="emailAltenativoProveedor" name="emailAltenativoProveedor" size="35" placeholder="micorreo@ejemplo.com">
+                <label for"paginaProveedor">Pagina Web</label>
+                <input type="text" id="paginaProveedor" name="paginaProveedor" size="35" placeholder="www.lawebdelaempresa.com">
+                <label for="telefonoprincipalProveedor">Telefono Principal</label>
+                <input type="text" id="telefonoprincipalProveedor" name="telefonoprincipalProveedor" size="35">
+                <label for="telefonoalternativoProveedor">Telefono Alternativo</label>
+                <input type="text" id="telefonoalternativoProveedor" name="telefonoalternativoProveedor" size="35">
+                <label for="faxProveedor">Fax</label>
+                <input type="text" id="faxProveedor" name="faxProveedor" size="35">
+
+			</fieldset>
+		</form>
+		<p id="respProveedor"></p>
+	</div>
